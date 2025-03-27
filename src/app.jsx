@@ -4,7 +4,9 @@ import Logout from './logout';
 import Areas from './areas';
 import Settings from './settings';
 import CreateArea from './create_area';
+import CreateAsset from './create_asset';
 import EditArea from './edit_area';
+import AreaAssets from './area_assets';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Navigate, HashRouter, Route, Link, Routes } from 'react-router-dom';
@@ -38,6 +40,8 @@ const App = (props) => {
           <Route path="/settings" element={<Settings/>}/>
           <Route path="/create_area" element={<AuthGuard><CreateArea/></AuthGuard>}/>
           <Route path="/areas/:area_id/edit" element={<AuthGuard><EditArea/></AuthGuard>}/>
+          <Route path="/areas/:area_id/assets" element={<AuthGuard><AreaAssets/></AuthGuard>}/>
+          <Route path="/areas/:area_id/create_asset" element={<AuthGuard><CreateAsset/></AuthGuard>}/>
           <Route path="/" element={<AuthGuard><Areas/></AuthGuard>}/>
         </Routes>
       </HashRouter>

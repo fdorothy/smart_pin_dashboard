@@ -16,7 +16,7 @@ const EditArea = (props) => {
     Api.get_area(params.area_id).then(area => {
       setArea(area);
     });
-  });
+  }, []);
 
   const handleEdit = (event) => {
     event.preventDefault();

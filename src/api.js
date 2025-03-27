@@ -65,4 +65,12 @@ export default class Api {
   static get_area(area_id) {
     return this.sendEnterpriseRequest("GET", `api/v1/enterprise/areas/${area_id}`);
   }
+
+  static get_assets(area_id) {
+    return this.sendEnterpriseRequest("GET", `api/v1/enterprise/areas/${area_id}/assets`);
+  }
+
+  static create_asset(area_id, params) {
+    return this.sendEnterpriseRequest("POST", `api/v1/enterprise/areas/${area_id}/assets`, params);
+  }
 }

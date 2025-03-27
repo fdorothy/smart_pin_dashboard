@@ -59,7 +59,7 @@ const Areas = (props) => {
       setLoaded(true);
       setAreas(areas);
     });
-  });
+  }, []);
 
   return <Container><h2>Areas</h2>{loaded ? <AreaTable areas={areas}/> : <Loading/>}</Container>;
 }
