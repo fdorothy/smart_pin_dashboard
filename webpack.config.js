@@ -22,10 +22,10 @@ module.exports = {
     asyncWebAssembly: true
   },
   output: {
-    path: path.resolve(__dirname, './public'),
+    path: path.resolve(__dirname, './docs'),
     filename: 'bundle.js',
   },
   devServer: {
-    static: path.resolve(__dirname, './public'),
+    static: path.resolve(__dirname, './docs'),
   },
 };
