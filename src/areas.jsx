@@ -11,7 +11,7 @@ import Api from './api';
 const AreaRow = (props) => {
   const { area } = props;
   return (
-    <tr key={area.id}>
+    <tr>
       <td>{area.id}</td>
       <td>{area.name}</td>
       <td>{area.longitude}</td>
@@ -42,7 +42,7 @@ const AreaTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {areas.entries.map((area) => <AreaRow area={area}/>)}
+          {areas.entries.map((area) => <AreaRow key={area.id} area={area}/>)}
         </tbody>
       </Table>
       <Link to="/create_area">Add Area</Link>

@@ -29,13 +29,16 @@ const App = (props) => {
     <Container>
       <h1>Smart Pins Dashboard</h1>
       <HashRouter>
-        <Navbar>
-          <Nav>
-            { loggedIn ? <Nav.Link as={Link} to="/">Areas</Nav.Link> : <></> }
-            <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
-            { loggedIn ? <Nav.Link as={Link} to="/logout">Logout</Nav.Link> : <></> }
-          </Nav>
-        </Navbar>
+        { loggedIn ? 
+          <Navbar>
+            <Nav>
+              <Nav.Link as={Link} to="/">Areas</Nav.Link>
+              <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
+              <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+            </Nav>
+          </Navbar>
+          : <></>
+        }
         <Routes>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/settings" element={<Settings/>}/>

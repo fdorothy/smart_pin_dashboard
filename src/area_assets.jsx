@@ -44,7 +44,7 @@ const AssetsTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {assets.entries.map((asset) => <AssetRow asset={asset}/>)}
+          {assets.entries.map((asset) => <AssetRow key={asset.id} asset={asset}/>)}
         </tbody>
       </Table>
       <Link to={`/areas/${area_id}/create_asset`}>Add Asset</Link>
