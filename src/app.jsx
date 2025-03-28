@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Logout from './logout';
 import Areas from './areas';
@@ -13,6 +13,7 @@ import Nav from 'react-bootstrap/Nav';
 import { Navigate, HashRouter, Route, Link, Routes } from 'react-router-dom';
 import Auth from './auth';
 import { useStore } from './store';
+import Api from './api';
 
 function AuthGuard({children}) {
   const loggedIn = useStore((state) => state.loggedIn);
@@ -25,6 +26,13 @@ function AuthGuard({children}) {
 
 const App = (props) => {
   const loggedIn = useStore((state) => state.loggedIn);
+
+  useEffect(() => {
+    if (loggedIn) {
+      Api.login().then(_ => Api.get_enterprise_token());
+    }
+  }, []);
+
   return (
     <Container>
       <h1>Smart Pins Dashboard</h1>
