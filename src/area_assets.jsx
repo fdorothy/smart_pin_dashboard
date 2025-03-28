@@ -13,13 +13,14 @@ const AssetRow = (props) => {
   return (
     <tr key={asset.id}>
       <td>{asset.id}</td>
+      <td>{asset.error ? "true" : ""}</td>
       <td>{asset.name}</td>
       <td>{asset.longitude}</td>
       <td>{asset.latitude}</td>
       <td><Timestamp dateString={asset.updated_at}/></td>
       <td><Timestamp dateString={asset.inserted_at}/></td>
       <td>
-        <Link to={`/areas/${asset.area_id}/assets`}>assets</Link> <Link to={`/areas/${asset.area_id}/edit`}>edit</Link>
+        <Link to={`/areas/${asset.area_id}/assets/${asset.id}/edit`}>edit</Link>
       </td>
     </tr>
   );
@@ -33,6 +34,7 @@ const AssetsTable = (props) => {
         <thead>
           <tr>
             <th>#</th>
+            <th>Error</th>
             <th>Name</th>
             <th>Longitude</th>
             <th>Latitude</th>

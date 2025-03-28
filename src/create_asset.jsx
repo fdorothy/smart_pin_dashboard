@@ -18,7 +18,7 @@ const CreateAsset = (props) => {
       latitude: formData.get("latitude"),
       longitude: formData.get("longitude")
     }).then(() => {
-      navigate("/");
+      navigate(`/areas/${area_id}/assets`);
     });
   };
 

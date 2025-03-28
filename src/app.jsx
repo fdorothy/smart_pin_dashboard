@@ -6,6 +6,7 @@ import Settings from './settings';
 import CreateArea from './create_area';
 import CreateAsset from './create_asset';
 import EditArea from './edit_area';
+import EditAsset from './edit_asset';
 import AreaAssets from './area_assets';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -42,6 +43,7 @@ const App = (props) => {
           <Route path="/areas/:area_id/edit" element={<AuthGuard><EditArea/></AuthGuard>}/>
           <Route path="/areas/:area_id/assets" element={<AuthGuard><AreaAssets/></AuthGuard>}/>
           <Route path="/areas/:area_id/create_asset" element={<AuthGuard><CreateAsset/></AuthGuard>}/>
+          <Route path="/areas/:area_id/assets/:asset_id/edit" element={<AuthGuard><EditAsset/></AuthGuard>}/>
           <Route path="/" element={<AuthGuard><Areas/></AuthGuard>}/>
         </Routes>
       </HashRouter>
