@@ -24,6 +24,7 @@ const AssetRow = (props) => {
       <td>{asset.error_message}</td>
       <td><Timestamp dateString={asset.updated_at}/></td>
       <td><Timestamp dateString={asset.inserted_at}/></td>
+      <td><Timestamp dateString={asset.deleted_at}/></td>
       <td>
         <Link to={`/areas/${asset.area_id}/assets/${asset.id}/edit`}>edit</Link>
       </td>
@@ -49,6 +50,7 @@ const AssetsTable = (props) => {
             <th>Error Message</th>
             <th>Updated At</th>
             <th>Created At</th>
+            <th>Deleted At</th>
             <th>Actions</th>
           </tr>
         </thead>

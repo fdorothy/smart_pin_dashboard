@@ -19,6 +19,7 @@ const AreaRow = (props) => {
       <td><Position lat={area.latitude} long={area.longitude}/></td>
       <td><Timestamp dateString={area.updated_at}/></td>
       <td><Timestamp dateString={area.inserted_at}/></td>
+      <td><Timestamp dateString={area.deleted_at}/></td>
       <td>
         <Link to={`/areas/${area.id}/assets`}>assets</Link> <Link to={`/areas/${area.id}/edit`}>edit</Link>
       </td>
@@ -39,6 +40,7 @@ const AreaTable = (props) => {
             <th>Position</th>
             <th>Updated At</th>
             <th>Created At</th>
+            <th>Deleted At</th>
             <th>Actions</th>
           </tr>
         </thead>

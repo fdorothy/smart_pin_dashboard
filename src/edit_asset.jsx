@@ -39,6 +39,13 @@ const EditAsset = (props) => {
     });
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    if (confirm("Are you sure you want to delete this asset? This action cannot be undone")) {
+      Api.delete_asset(area_id, asset_id).then(() => navigate(`/areas/${area_id}/assets`));
+    }
+  };
+
   return (
     <Container>
       <h2>Edit Asset {asset_id} in Area {area_id}</h2>
@@ -63,6 +70,7 @@ const EditAsset = (props) => {
            <Form.Control name="model_number" placeholder="Model Number" defaultValue={asset.model_number}/>
          </Form.Group>
          <Button type="submit">Save</Button>
+         <Button variant="danger" onClick={handleDelete}>Delete</Button>
        </Form>
       }
     </Container>

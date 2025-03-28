@@ -81,4 +81,12 @@ export default class Api {
   static edit_asset(area_id, asset_id, params) {
     return this.sendEnterpriseRequest("PUT", `api/v1/enterprise/areas/${area_id}/assets/${asset_id}`, params);
   }
+
+  static delete_area(area_id) {
+    return this.sendEnterpriseRequest("DELETE", `api/v1/enterprise/areas/${area_id}`);
+  }
+
+  static delete_asset(area_id, asset_id) {
+    return this.sendEnterpriseRequest("DELETE", `api/v1/enterprise/areas/${area_id}/assets/${asset_id}`);
+  }
 }

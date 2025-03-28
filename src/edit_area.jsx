@@ -33,6 +33,13 @@ const EditArea = (props) => {
     });
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    if (confirm("Are you sure you want to delete this area? This action cannot be undone")) {
+      Api.delete_area(params.area_id).then(() => navigate("/"));
+    }
+  };
+
   return (
     <Container>
       <h2>Edit Area</h2>
@@ -48,6 +55,7 @@ const EditArea = (props) => {
            <Form.Control name="latitude" placeholder="31.23" defaultValue={area.latitude}/>
          </Form.Group>
          <Button type="submit">Save</Button>
+         <Button variant="danger" onClick={handleDelete}>Delete</Button>
        </Form>
       }
     </Container>
