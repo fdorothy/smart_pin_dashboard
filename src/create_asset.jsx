@@ -16,7 +16,12 @@ const CreateAsset = (props) => {
     Api.create_asset(area_id, {
       name: formData.get("name"),
       latitude: formData.get("latitude"),
-      longitude: formData.get("longitude")
+      longitude: formData.get("longitude"),
+      description: formData.get("description"),
+      error: formData.get("error") === "on",
+      error_message: formData.get("error_message"),
+      serial_number: formData.get("serial_number"),
+      model_number: formData.get("model_number")
     }).then(() => {
       navigate(`/areas/${area_id}/assets`);
     });
@@ -33,6 +38,15 @@ const CreateAsset = (props) => {
           <Form.Control name="longitude" placeholder="41.34"/>
           <Form.Label>Latitude</Form.Label>
           <Form.Control name="latitude" placeholder="31.23"/>
+          <Form.Label>Description</Form.Label>
+          <Form.Control name="description" as="textarea" placeholder="Description"/>
+          <Form.Check type="checkbox" name="error" label="Error"/>
+          <Form.Label>Error Message</Form.Label>
+          <Form.Control name="error_message" placeholder="Error message"/>
+          <Form.Label>Serial Number</Form.Label>
+          <Form.Control name="serial_number" placeholder="Serial Number"/>
+          <Form.Label>Model Number</Form.Label>
+          <Form.Control name="model_number" placeholder="Model Number"/>
         </Form.Group>
         <Button type="submit">Create</Button>
       </Form>

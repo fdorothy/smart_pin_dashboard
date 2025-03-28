@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Loading from './loading';
 import Timestamp from './timestamp';
+import Position from './position';
 import { Link } from 'react-router-dom';
 import Api from './api';
 
@@ -14,8 +15,7 @@ const AreaRow = (props) => {
     <tr>
       <td>{area.id}</td>
       <td>{area.name}</td>
-      <td>{area.longitude}</td>
-      <td>{area.latitude}</td>
+      <td><Position lat={area.latitude} long={area.longitude}/></td>
       <td><Timestamp dateString={area.updated_at}/></td>
       <td><Timestamp dateString={area.inserted_at}/></td>
       <td>
@@ -29,13 +29,13 @@ const AreaTable = (props) => {
   const { areas } = props;
   return (
     <Container>
+      <Link to="/create_area">Add Area</Link>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>Name</th>
-            <th>Longitude</th>
-            <th>Latitude</th>
+            <th>Position</th>
             <th>Updated At</th>
             <th>Created At</th>
             <th>Actions</th>
@@ -45,7 +45,6 @@ const AreaTable = (props) => {
           {areas.entries.map((area) => <AreaRow key={area.id} area={area}/>)}
         </tbody>
       </Table>
-      <Link to="/create_area">Add Area</Link>
     </Container>
   );
 }

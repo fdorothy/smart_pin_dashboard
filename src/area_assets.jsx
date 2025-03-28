@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Loading from './loading';
 import Timestamp from './timestamp';
+import Position from './position';
 import { useParams, Link } from 'react-router-dom';
 import Api from './api';
 
@@ -13,10 +14,13 @@ const AssetRow = (props) => {
   return (
     <tr key={asset.id}>
       <td>{asset.id}</td>
-      <td>{asset.error ? "true" : ""}</td>
       <td>{asset.name}</td>
-      <td>{asset.longitude}</td>
-      <td>{asset.latitude}</td>
+      <td><Position lat={asset.latitude} long={asset.longitude}/></td>
+      <td>{asset.description}</td>
+      <td>{asset.serial_number}</td>
+      <td>{asset.model_number}</td>
+      <td>{asset.error ? "true" : ""}</td>
+      <td>{asset.error_message}</td>
       <td><Timestamp dateString={asset.updated_at}/></td>
       <td><Timestamp dateString={asset.inserted_at}/></td>
       <td>
@@ -30,14 +34,18 @@ const AssetsTable = (props) => {
   const { assets, area_id } = props;
   return (
     <Container>
+      <Link to={`/areas/${area_id}/create_asset`}>Add Asset</Link>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Error</th>
+            <th>ID</th>
             <th>Name</th>
-            <th>Longitude</th>
-            <th>Latitude</th>
+            <th>Position</th>
+            <th>Description</th>
+            <th>Serial Number</th>
+            <th>Model Number</th>
+            <th>Error</th>
+            <th>Error Message</th>
             <th>Updated At</th>
             <th>Created At</th>
             <th>Actions</th>
@@ -47,7 +55,6 @@ const AssetsTable = (props) => {
           {assets.entries.map((asset) => <AssetRow key={asset.id} asset={asset}/>)}
         </tbody>
       </Table>
-      <Link to={`/areas/${area_id}/create_asset`}>Add Asset</Link>
     </Container>
   );
 };

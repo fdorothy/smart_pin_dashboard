@@ -30,7 +30,9 @@ const EditAsset = (props) => {
         longitude: formData.get("longitude"),
         description: formData.get("description"),
         error: formData.get("error") === "on",
-        error_message: formData.get("error_message")
+        error_message: formData.get("error_message"),
+        serial_number: formData.get("serial_number"),
+        model_number: formData.get("model_number")
       }
     ).then(() => {
       navigate(`/areas/${area_id}/assets`);
@@ -51,10 +53,14 @@ const EditAsset = (props) => {
            <Form.Label>Latitude</Form.Label>
            <Form.Control name="latitude" placeholder="31.23" defaultValue={asset.latitude}/>
            <Form.Label>Description</Form.Label>
-           <Form.Control name="description" placeholder="Description" defaultValue={asset.description}/>
+           <Form.Control name="description" as="textarea" placeholder="Description" defaultValue={asset.description}/>
            <Form.Check type="checkbox" name="error" label="Error" defaultChecked={asset.error}/>
            <Form.Label>Error Message</Form.Label>
            <Form.Control name="error_message" placeholder="Error message" defaultValue={asset.error_message}/>
+           <Form.Label>Serial Number</Form.Label>
+           <Form.Control name="serial_number" placeholder="Serial Number" defaultValue={asset.serial_number}/>
+           <Form.Label>Model Number</Form.Label>
+           <Form.Control name="model_number" placeholder="Model Number" defaultValue={asset.model_number}/>
          </Form.Group>
          <Button type="submit">Save</Button>
        </Form>
