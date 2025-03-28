@@ -50,7 +50,7 @@ const AssetsTable = (props) => {
       <Link to={`/areas/${area_id}/create_asset`}>Add Asset</Link>
     </Container>
   );
-}
+};
 
 const AreaAssets = (props) => {
   const [loaded, setLoaded] = useState(false);
@@ -65,6 +65,6 @@ const AreaAssets = (props) => {
   }, []);
 
   return <Container><h2>Area {area_id} Assets</h2>{loaded ? <AssetsTable assets={assets} area_id={area_id}/> : <Loading/>}</Container>;
-}
+};
 
 export default AreaAssets;
