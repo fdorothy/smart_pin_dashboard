@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import Loading from './loading';
 import Timestamp from './timestamp';
 import Position from './position';
@@ -26,7 +27,7 @@ const AreaRow = (props) => {
 }
 
 const AreaTable = (props) => {
-  const { areas } = props;
+  const { areas, onClickMore, hasMore } = props;
   return (
     <Container>
       <Link to="/create_area">Add Area</Link>
@@ -42,8 +43,9 @@ const AreaTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {areas.entries.map((area) => <AreaRow key={area.id} area={area}/>)}
+          {areas.map((area) => <AreaRow key={area.id} area={area}/>)}
         </tbody>
+        { hasMore ? <Button onClick={onClickMore}>More...</Button> : <></> }
       </Table>
     </Container>
   );
@@ -52,15 +54,30 @@ const AreaTable = (props) => {
 const Areas = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [areas, setAreas] = useState([]);
+  const [after, setAfter] = useState("");
 
   useEffect(() => {
-    Api.get_areas().then(areas => {
+    Api.get_areas().then(page => {
       setLoaded(true);
-      setAreas(areas);
+      setAreas(page.entries);
+      setAfter(page.after);
     });
   }, []);
 
-  return <Container><h2>Areas</h2>{loaded ? <AreaTable areas={areas}/> : <Loading/>}</Container>;
+  const getMore = () => {
+    Api.get_areas(after).then(page => {
+      setAreas(areas.concat(page.entries));
+      setAfter(page.after);
+    });
+  };
+
+  const hasMore = after !== null;
+  return (
+    <Container>
+      <h2>Areas</h2>
+      {loaded ? <AreaTable areas={areas} onClickMore={getMore} hasMore={hasMore}/> : <Loading/>}
+    </Container>
+  );
 }
 
 export default Areas;

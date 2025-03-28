@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import Loading from './loading';
 import Timestamp from './timestamp';
 import Position from './position';
@@ -31,7 +32,7 @@ const AssetRow = (props) => {
 }
 
 const AssetsTable = (props) => {
-  const { assets, area_id } = props;
+  const { assets, area_id, onClickMore, hasMore } = props;
   return (
     <Container>
       <Link to={`/areas/${area_id}/create_asset`}>Add Asset</Link>
@@ -52,8 +53,9 @@ const AssetsTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {assets.entries.map((asset) => <AssetRow key={asset.id} asset={asset}/>)}
+          {assets.map((asset) => <AssetRow key={asset.id} asset={asset}/>)}
         </tbody>
+        { hasMore ? <Button onClick={onClickMore}>More...</Button> : <></> }
       </Table>
     </Container>
   );
@@ -62,16 +64,31 @@ const AssetsTable = (props) => {
 const AreaAssets = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [assets, setAssets] = useState([]);
+  const [after, setAfter] = useState("");
   const { area_id } = useParams();
 
   useEffect(() => {
-    Api.get_assets(area_id).then(assets => {
+    Api.get_assets(area_id).then(page => {
       setLoaded(true);
-      setAssets(assets);
+      setAssets(page.entries);
+      setAfter(page.after);
     });
   }, []);
 
-  return <Container><h2>Area {area_id} Assets</h2>{loaded ? <AssetsTable assets={assets} area_id={area_id}/> : <Loading/>}</Container>;
+  const getMore = () => {
+    Api.get_assets(area_id, after).then(page => {
+      setAssets(assets.concat(page.entries));
+      setAfter(page.after);
+    });
+  };
+
+  const hasMore = after !== null;
+  return (
+    <Container>
+      <h2>Area {area_id} Assets</h2>
+      {loaded ? <AssetsTable assets={assets} area_id={area_id} onClickMore={getMore} hasMore={hasMore}/> : <Loading/>}
+    </Container>
+  );
 };
 
 export default AreaAssets;

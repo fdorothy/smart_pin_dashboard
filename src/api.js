@@ -50,8 +50,8 @@ export default class Api {
     });
   }
 
-  static get_areas() {
-    return this.sendEnterpriseRequest("GET", "api/v1/enterprise/areas");
+  static get_areas(after = "") {
+    return this.sendEnterpriseRequest("GET", `api/v1/enterprise/areas?after=${after}`);
   }
 
   static create_area(params) {
@@ -66,8 +66,8 @@ export default class Api {
     return this.sendEnterpriseRequest("GET", `api/v1/enterprise/areas/${area_id}`);
   }
 
-  static get_assets(area_id) {
-    return this.sendEnterpriseRequest("GET", `api/v1/enterprise/areas/${area_id}/assets`);
+  static get_assets(area_id, after = "") {
+    return this.sendEnterpriseRequest("GET", `api/v1/enterprise/areas/${area_id}/assets?after=${after}`);
   }
 
   static create_asset(area_id, params) {
